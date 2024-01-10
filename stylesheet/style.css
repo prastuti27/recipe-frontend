@@ -34,4 +34,37 @@ body {
   border: none;
   padding: 10px 15px;
   cursor: pointer;
+  font-size: 16px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.page {
+  background-color: white !important;
+  color: black !important;
+}
+.page:hover {
+  background-color: #f09a66 !important;
+  color: white !important;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.header {
+  background-image: url("../public/assets/Header.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  height: 100vh;
+}
+.header_img {
+  display: flex;
+  justify-content: center;
+  /* align-items: center;  */
+}
+.header img {
+  margin-top: 20px;
+  height: 400px;
+  width: 500px;
 }
