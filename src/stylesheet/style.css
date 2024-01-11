@@ -52,7 +52,7 @@ body {
 }
 
 .header {
-  background-image: url("../public/assets/Header.png");
+  background-image: url("../assets/Header.png");
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
@@ -67,4 +67,7 @@ body {
   margin-top: 20px;
   height: 400px;
   width: 500px;
+}
+.login:hover {
+  background-color: #d16c2d;
 }

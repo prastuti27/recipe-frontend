@@ -1,5 +1,5 @@
 body {
-  background-image: url("../public/assets/login.jpg");
+  background-image: url("../assets/login.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   color: #58595b;
@@ -24,6 +24,10 @@ img {
   max-width: 100%;
   margin-bottom: 20px;
 }
+.signup-img {
+  max-width: 80%;
+  margin-left: 10%;
+}
 
 label {
   display: block;
@@ -36,15 +40,16 @@ input {
   margin-bottom: 16px;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid #ccc; /* Add this line for the underline effect */
-  outline: none; /* Remove default focus outline */
+  border-bottom: 1px solid #ccc;
+  outline: none;
 }
 
-/* Add focus styles for better user experience */
 input:focus {
-  border-bottom: 2px solid #f09a66; /* Change the color to your preferred focus color */
+  border-bottom: 2px solid #f09a66;
 }
-
+i {
+  margin-left: -14px;
+}
 button {
   width: 50%;
   margin-left: 25%;
@@ -56,7 +61,14 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
-
+.password-container {
+  display: flex;
+}
 .signupform {
   width: 350px;
+}
+.password-toggle-icon {
+  color: #f09a66;
+  font-size: 18px;
+  cursor: pointer;
 }
