@@ -25,6 +25,7 @@ loginButton?.addEventListener("click", async (e) => {
   console.log(email?.value, password?.value);
   const res = await axios.post(loginUrl, userData);
   const userDatas = res.data.user;
+  console.log(userDatas)
   localStorage.setItem("user", JSON.stringify(userDatas));
   localStorage.setItem("token", res.data.user.accessToken);
   if (res.status === 200) {

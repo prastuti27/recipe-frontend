@@ -33,26 +33,33 @@ if (user) {
 
 
 // main.ts
+document.addEventListener('DOMContentLoaded', function () {
+  // Your code here
 
-const title = document.querySelector<HTMLHeadingElement>(".card-title");
-const description = document.querySelector<HTMLParagraphElement>(".card-text");
 
-if (title && description) {
-  axios.get('your_recipe_api_url')
-    .then((response) => {
-      const { title, description } = response.data;
 
-     
-      if (title !== null && description !== null) {
-      title.textContent = title;
-        description.textContent = description;
+
+axios.get("http://localhost:8000/api/recipe/recipes")
+  .then((response) => {
+    const { title, description } = response.data.data;
+    
+
+    if (title !== null && description !== null) {
+      const titleElement = document.querySelector('.card-title'); // Use querySelector to find elements within the card
+      const descriptionElement = document.querySelector('.card-text'); // Use querySelector to find el
+      if (titleElement && descriptionElement) {
+        titleElement.textContent = title;
+        descriptionElement.textContent = description;
       } else {
-        console.error('Recipe title or description is null.');
+        console.error('Card title or description element not found.');
       }
-    })
-    .catch((error) => {
-      console.error('Error fetching recipe data:', error);
-    });
-} else {
-  console.error('Card title or description element not found.');
-}
+    } else {
+      console.error('Recipe title or description is null.');
+    }
+  })
+ 
+  .catch((error) => {
+    console.error('Error fetching recipe data:', error);
+  });
+ 
+});

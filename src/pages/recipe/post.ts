@@ -10,45 +10,65 @@ const categories = document.querySelector<HTMLInputElement>("#categories")as HTM
 const submitButton = document.querySelector<HTMLButtonElement>("#submit-btn")as HTMLButtonElement;
 
 const addRecipeUrl = "http://localhost:8000/api/recipe/recipes";
-
+let imageData =""
+photoInput.addEventListener("change",handleFileSelect)
+function handleFileSelect(event:any){
+ 
+  const fileInput = event.target;
+  const selectedFile = fileInput?.files[0];
+  if (selectedFile) {
+    // const file = photoInput.files && photoInput.files[0];
+    // if(file){
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onload = () => {imageData= reader.result as string};
+    // }
+    console.log('File selected:', selectedFile);
+    // You can perform additional actions with the selected file here
+  } else {
+    console.log('No file selected');
+  }
+}
 
 const ingredientsArray:{ name: string; quantity: string }[] = [];
 const instructionsArray:string[] = []
 
-
 export interface createRecipePayloadInterface {
-    title: string;
-    description: string;
-    ingredients: { name: string; quantity: string }[];
-    instructions: string[];
-    photo: string;
-    // createdBy: number;
-    categories:string
-  };
+  title: string;
+  description: string;
+  ingredients: { name: string; quantity: string }[];
+  instructions: string[];
+  photo: string;
+  // createdBy: number;
+  categories:string[]
+};
 
 submitButton?.addEventListener("click", async (e) => {
 try{
-    e.preventDefault();
-    const userData:createRecipePayloadInterface = {
-      title: title.value,
-      description: description.value,
-      ingredients: ingredientsArray,
-      instructions: instructionsArray,
-      photo: "",
-      categories: categories.value,
-    };
-    console.log(userData);
-    const imageUrl = await uploadPhotoToCloudinary();
-    userData.photo = imageUrl;
-    const res = await axios.post(addRecipeUrl, userData);
-    const userDatas = res.data.user;
-    
-      window.location.href = "../login/login.html";
-    
-    console.log(userDatas);
-    console.log(photoInput.files);
+  e.preventDefault();
+  
+  const userData:createRecipePayloadInterface = {
+    title: title.value,
+    description: description.value,
+    ingredients: ingredientsArray,
+    instructions: instructionsArray,
+    photo:imageData,
+    categories: categories.value.split(",").map(category => category.trim()),
+    // createdBy:
+  };
+  
+  console.log(userData);
+  // const imageUrl = await uploadPhotoToCloudinary();
+  // userData.photo = imageUrl;
+  const res = await axios.post(addRecipeUrl, userData);
+  const userDatas = res.data.user;
+  
+    // window.location.href = "../login/login.html";
+  
+  console.log(userDatas);
+  console.log(photoInput.files);
 }catch(error){
-    console.log(error);
+  console.log(error);
 }
 
 });
@@ -60,8 +80,9 @@ const addBtn = document.querySelector("#add-ingredient") as HTMLButtonElement;
 
 addBtn.addEventListener("click",(e:Event)=>{
     e.preventDefault();
-    const ingredient = ingredientInput.value;
-    const qty = quantity.value;
+    const ingredient = ingredientInput.value.trim();
+    const qty = quantity.value.trim();
+    if (ingredient !== ""&& qty !==""){
     ingredientsArray.push({name:ingredient,quantity:qty})
     ingredientInput.value = "";
     quantity.value= "";
@@ -74,11 +95,14 @@ addBtn.addEventListener("click",(e:Event)=>{
     
     const qtyData = document.createElement("td") as HTMLElement;
 
-    qtyData.innerText = ingredient;
+    qtyData.innerText = qty;
     
     tableRow.appendChild(ingredientData);
     tableRow.appendChild(qtyData);
-    table.appendChild(tableRow)
+    table.appendChild(tableRow)}
+    else {
+      console.error("ingredients and quantity cannot be empty")
+    }
 })
 
 
@@ -89,8 +113,8 @@ const instructionsTable = document.querySelector("#instructions-table") as HTMLT
 
 addStepsBtn.addEventListener("click",(e:Event)=>{
     e.preventDefault();
-    const instruction = instructionsInput.value;
- 
+    const instruction = instructionsInput.value.trim();
+ if (instruction !==""){
     instructionsArray.push(instruction)
     instructionsInput.value = "";
 
@@ -106,36 +130,51 @@ addStepsBtn.addEventListener("click",(e:Event)=>{
     tableRow.appendChild(instructionData);
   
     instructionsTable.appendChild(tableRow)
+ }
+ else{
+  console.error("instructions cant be empty")
+ }
 })
 
-async function uploadPhotoToCloudinary(): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    const file = photoInput.files && photoInput.files[0];
-    console.log(file)
+// async function getImage():string{
+//   let result = ""
+//   const file = photoInput.files && photoInput.files[0];
+//   if(file){
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => {result = reader.result as string};
+//   }
+//   return result
+// }
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
+// async function uploadPhotoToCloudinary(): Promise<string> {
+//   return new Promise<string>((resolve, reject) => {
+//     const file = photoInput.files && photoInput.files[0];
+//     console.log(file)
+
+//     if (file) {
+//       const formData = new FormData();
+//       formData.append('file', file);
 
     
-      axios.post(`https://api.cloudinary.com/v1_1/dvzvehmau/image/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': '581965853338769',
-        },
-      })
-        .then((response) => {
-          resolve(response.data.secure_url);
-        })
-        .catch((error) => {
-          console.error("Cloudinary Upload Error:", error);
-          reject(error);
-        });
-    } else {
-      reject(new Error("No file selected"));
-    }
-  });
-}
+//       axios.post(`https://api.cloudinary.com/v1_1/dvzvehmau/image/upload`, formData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//           'Authorization': '581965853338769',
+//         },
+//       })
+//         .then((response) => {
+//           resolve(response.data.secure_url);
+//         })
+//         .catch((error) => {
+//           console.error("Cloudinary Upload Error:", error);
+//           reject(error);
+//         });
+//     } else {
+//       reject(new Error("No file selected"));
+//     }
+//   });
+// }
 
 
 

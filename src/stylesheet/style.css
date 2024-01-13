@@ -71,3 +71,8 @@ body {
 .login:hover {
   background-color: #d16c2d;
 }
+
+.recipeContainer{
+  padding: 30px;
+  background-color: #f8eae1; ;
+}
