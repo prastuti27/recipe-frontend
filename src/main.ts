@@ -29,3 +29,30 @@ const res = axios.get("http://localhost:8000/api/users", {
 if (user) {
   user.textContent = username;
 }
+
+
+
+// main.ts
+
+const title = document.querySelector<HTMLHeadingElement>(".card-title");
+const description = document.querySelector<HTMLParagraphElement>(".card-text");
+
+if (title && description) {
+  axios.get('your_recipe_api_url')
+    .then((response) => {
+      const { title, description } = response.data;
+
+     
+      if (title !== null && description !== null) {
+      title.textContent = title;
+        description.textContent = description;
+      } else {
+        console.error('Recipe title or description is null.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching recipe data:', error);
+    });
+} else {
+  console.error('Card title or description element not found.');
+}

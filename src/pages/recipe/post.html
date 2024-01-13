@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Recipe Details</h1>
-    <form action="/submit_recipe" method="post" enctype="multipart/form-data">
+    <form action="/recipes" method="post" enctype="multipart/form-data">
       <label for="title">Title:</label><br />
       <input type="text" id="title" name="title" /><br /><br />
 
@@ -24,7 +24,6 @@
         <th>Ingredient</th>
         <th>Quantity</th>
         
-        </tr>
       </table>
 
       <br /><br />
@@ -35,22 +34,31 @@
       <button id="add-ingredient">Add</button>
 
       <label for="instructions">Instructions:</label><br />
-      <textarea
-        id="instructions"
-        name="instructions"
-        rows="8"
-        cols="50"
-      ></textarea
-      ><br /><br />
+      <table id="instructions-table">
+        <th>Steps</th>
+
+        
+      </table>
+
+
+     
+      <input type="text" id="steps">
+      
+
+      <button id="add-instruction">Add</button>
 
       <label for="photo">Photo:</label><br />
-      <input type="file" id="photo" name="photo" /><br /><br />
+      <input type="file" id="photo" name="photo" accept="image/*"  /><br /><br />
 
       <label for="categories">Categories:</label><br />
       <input type="text" id="categories" name="categories" /><br /><br />
 
-    <button type="submit" value="Submit" >Submit</button>
+    <button type="submit" value="Submit" id="submit-btn" >Submit</button>
     </form>
+    
+     
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.12.0/cloudinary-core-shrinkwrap.min.js"></script>
     <script type="module" src="post.ts"></script>
   </body>
 </html>
