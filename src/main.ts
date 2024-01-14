@@ -1,4 +1,6 @@
 import axios from "axios";
+import { handleLikeButtonClick } from "./handleLike";
+import { handleSave } from "./handleSave";
 const user = document.createElement("button");
 const logout = document.querySelector<HTMLButtonElement>("#logout");
 const btndiv =
@@ -71,14 +73,19 @@ axios.get("http://localhost:8000/api/recipe/recipes")
       card.classList.add('card');
       card.style.width = '18rem';
       
+      
       card.innerHTML = `
         <img src="${recipe.photo}" class="card-img-top" alt="${recipe.title}">
         <div class="card-body">
           <h5 class="card-title">${recipe.title}</h5>
           <p class="card-text">${recipe.description}</p>
           <a href="./pages/RecipeDetails/details.html?id=${recipe.id}" class="btn btn-primary">Details</a>
+          <div class="save-button" data-recipe-id="${recipe.id}">
           <i class="ph ph-heart"></i>
+        </div>
+          <div class="like-button" data-recipe-id="${recipe.id}">
           <i class="ph ph-thumbs-up"></i>
+        </div>
           <i class="ph ph-chat-centered-dots"></i>
           <h1 class="card-title">By${recipe.createdBy ? recipe.firstname : ''} ${recipe.createdBy ? recipe.lastname : ''}</h1>
 
@@ -86,7 +93,13 @@ axios.get("http://localhost:8000/api/recipe/recipes")
 
         </div>
       `;
+      const likeButton = card.querySelector('.like-button') as HTMLElement;
+      const isLiked = response.data.isLiked; // Adjust based on your data structure
     
+      const saveButton = card.querySelector('.save-button') as HTMLElement;
+      saveButton?.addEventListener('click', (event) => handleSave(event));
+
+      likeButton?.addEventListener('click', () => handleLikeButtonClick(likeButton, recipe.id, isLiked));
       recipeContainer?.appendChild(card);
     });
   })
