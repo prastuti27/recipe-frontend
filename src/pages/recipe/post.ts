@@ -36,7 +36,7 @@ const instructionsArray:string[] = []
 export interface createRecipePayloadInterface {
   title: string;
   description: string;
-  ingredients: { name: string; quantity: string }[];
+  ingredients: Array<{ name: string; quantity: string }>;
   instructions: string[];
   photo: string;
   // createdBy: number;
@@ -46,6 +46,9 @@ export interface createRecipePayloadInterface {
 submitButton?.addEventListener("click", async (e) => {
 try{
   e.preventDefault();
+
+  console.log(ingredientsArray)
+
   
   const userData:createRecipePayloadInterface = {
     title: title.value,
@@ -57,10 +60,12 @@ try{
     // createdBy:
   };
   
+  const token = localStorage.getItem('token')
   console.log(userData);
   // const imageUrl = await uploadPhotoToCloudinary();
   // userData.photo = imageUrl;
-  const res = await axios.post(addRecipeUrl, userData);
+  console.log(token)
+  const res = await axios.post(addRecipeUrl, userData, {headers: {Authorization: `Bearer ${token}`}});
   const userDatas = res.data.user;
   
     // window.location.href = "../login/login.html";
