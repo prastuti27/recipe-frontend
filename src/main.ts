@@ -39,28 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// axios.get("http://localhost:8000/api/recipe/recipes")
-//   .then((response) => {
-//     const { title, description } = response.data.data;
-    
 
-//     if (title !== null && description !== null) {
-//       const titleElement = document.querySelector('.card-title'); // Use querySelector to find elements within the card
-//       const descriptionElement = document.querySelector('.card-text'); // Use querySelector to find el
-//       if (titleElement && descriptionElement) {
-//         titleElement.textContent = title;
-//         descriptionElement.textContent = description;
-//       } else {
-//         console.error('Card title or description element not found.');
-//       }
-//     } else {
-//       console.error('Recipe title or description is null.');
-//     }
-//   })
- 
-//   .catch((error) => {
-//     console.error('Error fetching recipe data:', error);
-//   });
+
 
 interface createRecipePayloadInterface {
   id: number;
@@ -69,7 +49,11 @@ interface createRecipePayloadInterface {
   ingredients: { name: string; quantity: string }[];
   instructions: string[];
   photo: string;
-  createdBy: number;
+  createdBy: number
+    
+    firstname: string;
+    lastname: string;
+  
   categories:string[]
 };
 
@@ -80,13 +64,13 @@ axios.get("http://localhost:8000/api/recipe/recipes")
 
     const recipeContainer = document.querySelector('.recipeContainer');
 
-    console.log(recipes)
+ 
 
     recipes.forEach((recipe: createRecipePayloadInterface) => { 
       const card = document.createElement('div');
       card.classList.add('card');
       card.style.width = '18rem';
-
+      
       card.innerHTML = `
         <img src="${recipe.photo}" class="card-img-top" alt="${recipe.title}">
         <div class="card-body">
@@ -96,9 +80,13 @@ axios.get("http://localhost:8000/api/recipe/recipes")
           <i class="ph ph-heart"></i>
           <i class="ph ph-thumbs-up"></i>
           <i class="ph ph-chat-centered-dots"></i>
+          <h1 class="card-title">By${recipe.createdBy ? recipe.firstname : ''} ${recipe.createdBy ? recipe.lastname : ''}</h1>
+
+
+
         </div>
       `;
-
+    
       recipeContainer?.appendChild(card);
     });
   })

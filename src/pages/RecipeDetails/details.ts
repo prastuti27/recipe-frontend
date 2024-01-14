@@ -7,7 +7,7 @@ interface createRecipePayloadInterface {
   instructions: string[];
   photo: string;
   createdBy: number;
-  categories: string[];
+  categories:{ categoryName: string }[];
 }
 
 console.log(window.location.search);
@@ -32,15 +32,16 @@ console.log(recipe);
       <p class="detail-ingredients">${ingredient.name}</p>
       <p class="detail-ingredients">${ingredient.quantity}</p>
     `); // Joining the array into a single string
-
+    const categoryDetails = recipe.categories.map((category) => `
+    <p class="detail-categories">${category.categoryName}</p>`)
     detail.innerHTML = `
       <img src="${recipe.photo}" alt="${recipe.title}">
       <div class="detail-body">
         <h5>${recipe.title}</h5>
         <p class="detail-text">${recipe.description}</p>
-        ${ingredientDetails} <!-- Inserting ingredient details -->
+        ${ingredientDetails} 
         <p class="detail-instructions">${recipe.instructions}</p>
-        <p class="detail-categories">${recipe.categories}</p>
+        ${categoryDetails}
         <p class="author">${recipe.createdBy}</p>
       </div>
     `;
