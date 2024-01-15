@@ -32,7 +32,7 @@ console.log(recipe);
 
     const detail = document.createElement('div');
     detail.classList.add('detail'); 
-    // card.style.width = '18rem';
+   
 
     const ingredientDetails = recipe.ingredients.map((ingredient) => `
       <p class="detail-ingredients">${ingredient.name}</p>

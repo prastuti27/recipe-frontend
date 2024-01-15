@@ -22,7 +22,7 @@ loginButton?.addEventListener("click", async (e) => {
   e.preventDefault();
 
   try {
-    // Validate form data using Yup schema
+    
     await schema.validate({ email: email?.value, password: password?.value }, { abortEarly: false });
 
     const userData = {
@@ -37,13 +37,13 @@ loginButton?.addEventListener("click", async (e) => {
     localStorage.setItem("token", res.data.user.accessToken);
 
     if (res.status === 200) {
-      // Display a success message
+      
       alert("Login successful!");
       localStorage.setItem("token", res.data.user.accessToken);
       window.location.href = "../../";
     }
   } catch (error:any) {
-    // Handle validation errors
+   
     console.error(error.errors);
 
     alert("Login failed. Please check your credentials.");

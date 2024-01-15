@@ -27,7 +27,7 @@ export function handleSave(event: Event) {
         })
         .then(response => {
             console.log('Recipe saved successfully:', response.data);
-            // Update UI or provide feedback to the user
+           
             if (heartIcon) {
                 heartIcon.style.color = 'red';
             }

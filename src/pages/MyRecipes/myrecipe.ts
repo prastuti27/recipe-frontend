@@ -96,10 +96,10 @@ window.addEventListener('load', async function () {
       deleteButton.textContent = 'Delete';
       deleteButton.addEventListener('click', async () => {
         try {
-          // Call the deleteRecipe function
+         
           await deleteRecipe(recipe.id);
       
-          // Remove the card from the UI immediately
+          
           card.remove();
         } catch (error) {
           console.error('Error deleting recipe:', error);
@@ -110,9 +110,9 @@ window.addEventListener('load', async function () {
         editButton.classList.add('btn', 'btn-primary');
         editButton.textContent = 'Edit';
         
-        // Event listener for the Edit button
+
         editButton.addEventListener('click', () => {
-          // Redirect to the edit page with the recipe ID in edit mode
+          
           window.location.href = `edit.html?id=${recipe.id}`;
         });
      

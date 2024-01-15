@@ -14,9 +14,9 @@ import axios from "axios"
         },
       });
   
-      // Assuming your API returns some indication of success
+     
       if (response.data.success) {
-        // Assuming you want to remove the deleted recipe from the UI
+  
         const deletedCard = document.getElementById(`recipe-${recipeId}`);
         if (deletedCard) {
           deletedCard.remove();

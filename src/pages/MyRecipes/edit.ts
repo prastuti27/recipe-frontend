@@ -108,7 +108,7 @@ axios.get(apiUrl)
 
       interface Category {
         categoryName: string;
-        // other properties if any
+        
       }
     if (categoriesElement) {
   if (data.categories && data.categories.length > 0) {

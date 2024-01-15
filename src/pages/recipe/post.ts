@@ -3,9 +3,9 @@ import axios from "axios"
 
 const title = document.querySelector<HTMLInputElement>("#title") as HTMLInputElement;
 const description= document.querySelector<HTMLInputElement>("#description") as HTMLInputElement;
-// const ingredients = document.querySelector<HTMLInputElement>("#ingredients")as HTMLInputElement;
+
 const photoInput = document.querySelector<HTMLInputElement>("#photo")as HTMLInputElement;
-// const instructions = document.querySelector<HTMLInputElement>("#instructions")as HTMLInputElement;
+
 const categories = document.querySelector<HTMLInputElement>("#categories")as HTMLInputElement;
 const submitButton = document.querySelector<HTMLButtonElement>("#submit-btn")as HTMLButtonElement;
 
@@ -17,14 +17,13 @@ function handleFileSelect(event:any){
   const fileInput = event.target;
   const selectedFile = fileInput?.files[0];
   if (selectedFile) {
-    // const file = photoInput.files && photoInput.files[0];
-    // if(file){
+  
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
       reader.onload = () => {imageData= reader.result as string};
-    // }
+    
     console.log('File selected:', selectedFile);
-    // You can perform additional actions with the selected file here
+    
   } else {
     console.log('No file selected');
   }
@@ -39,7 +38,7 @@ export interface createRecipePayloadInterface {
   ingredients: Array<{ name: string; quantity: string }>;
   instructions: string[];
   photo: string;
-  // createdBy: number;
+ 
   categories:string[]
 };
 
@@ -57,18 +56,17 @@ try{
     instructions: instructionsArray,
     photo:imageData,
     categories: categories.value.split(",").map(category => category.trim()),
-    // createdBy:
+
   };
   
   const token = localStorage.getItem('token')
   console.log(userData);
-  // const imageUrl = await uploadPhotoToCloudinary();
-  // userData.photo = imageUrl;
+ 
   console.log(token)
   const res = await axios.post(addRecipeUrl, userData, {headers: {Authorization: `Bearer ${token}`}});
   const userDatas = res.data.user;
   
-    // window.location.href = "../login/login.html";
+ 
   
   console.log(userDatas);
   console.log(photoInput.files);

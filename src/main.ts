@@ -27,7 +27,7 @@ if (searchContainer) {
   const searchButton = document.createElement('button');
   searchButton.textContent = 'Search';
 
-  // Append the search input and button to the search container
+ 
   searchContainer.appendChild(searchInput);
   searchContainer.appendChild(searchButton);
 }
@@ -49,9 +49,9 @@ if (user) {
 
 
 
-// main.ts
+
 document.addEventListener('DOMContentLoaded', function () {
-  // Your code here
+
 
 
 
@@ -110,7 +110,7 @@ axios.get("http://localhost:8000/api/recipe/recipes")
       `;
       const likeButton = card.querySelector('.like-button') as HTMLElement;
       console.log(response.data)
-      const isLiked = response.data.isLiked; // Adjust based on your data structure
+      const isLiked = response.data.isLiked; 
     
       const saveButton = card.querySelector('.save-button') as HTMLElement;
       saveButton?.addEventListener('click', (event) => handleSave(event));

@@ -11,7 +11,7 @@ const togglePassword = document.querySelector<HTMLAnchorElement>(
 );
 const signupUrl = "http://localhost:8000/api/auth/register";
 
-// Define Yup schema for form validation
+
 const schema = yup.object().shape({
   firstname: yup.string().required("First Name is required"),
   lastname: yup.string().required("Last Name is required"),
@@ -30,7 +30,7 @@ signupButton?.addEventListener("click", async (e) => {
   e.preventDefault();
 
   try {
-    // Validate form data using Yup schema
+ 
     await schema.validate(
       {
         firstname: firstname?.value,
@@ -53,16 +53,16 @@ signupButton?.addEventListener("click", async (e) => {
     console.log("Signup response:", res);
 
     if (res.status === 200) {
-      // Display a success message
+     
       alert("Registration successful! You can now log in.");
       console.log("Navigating to login page...");
       window.location.href = "../login/login.html";
     }
   } catch (error: any) {
-    // Handle validation errors
+   
     console.error("Signup failed:", error.errors);
 
-    // Display an error message
+    
     alert("Registration failed. Please check your inputs.");
   }
 });

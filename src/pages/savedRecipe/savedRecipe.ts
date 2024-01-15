@@ -2,13 +2,13 @@ import axios from "axios";
 import "../../stylesheet/home.css";
 
 interface SavedRecipe {
-    id: number;                // ID of the saved recipe
-    userId: number;            // User ID
-    savedRecipeId: number;     // ID of the saved recipe (if needed)
-    photo: string;             // Photo URL
-    title: string;             // Recipe title
-    description: string;       // Recipe description
-    recipeId: number;          // Actual recipe ID
+    id: number;                
+    userId: number;           
+    savedRecipeId: number;    
+    photo: string;           
+    title: string;            
+    description: string;       
+    recipeId: number;          
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,9 +79,9 @@ function unsaveRecipe(recipeId: number, card: HTMLElement) {
     })
     .then(response => {
         console.log('Recipe successfully unsaved:', response.data);
-        // Remove the card from the DOM
+       
         card.remove();
-        // You can update the UI or take other actions as needed
+    
     })
     .catch(error => {
         console.error('Error unsaving recipe:', error);
