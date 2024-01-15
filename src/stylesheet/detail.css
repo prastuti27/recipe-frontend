@@ -1,0 +1,81 @@
+/* Global styles for body or container */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../assets/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Styling for the recipe details container */
+  .recipeDetails {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    
+    text-align: center; /* Center the content */
+  }
+  
+  /* Styling for the individual recipe detail */
+  .detail {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 50;
+    margin-bottom: 20px;
+    background-color:rgb(213 176 176 / 90%); /* Slightly transparent white background */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight box shadow */
+  }
+  
+  /* Styling for the recipe image */
+  .detail img {
+    width: 50%; /* Use width instead of max-width for larger image */
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 12px; /* Slightly increase border radius for a smoother look */
+  }
+  
+  /* Styling for the recipe title */
+  .detail h5 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Styling for the recipe description */
+  .detail-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  /* Styling for the ingredients */
+  .detail-ingredients {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #777;
+  }
+  
+  /* Styling for the instructions */
+  .detail-instructions {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #444;
+  }
+  
+  /* Styling for the categories */
+  .detail-categories {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #777;
+  }
+  
+  /* Styling for the author */
+  .author {
+    font-size: 16px;
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+  }
+  

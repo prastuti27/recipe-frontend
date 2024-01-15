@@ -76,3 +76,25 @@ body {
   padding: 30px;
   background-color: #f8eae1; ;
 }
+.like-button {
+  cursor: pointer;
+  color: #ccc; /* Default color */
+}
+
+.like-button.liked {
+  color: #3498db; /* Liked color */
+}
+.banner {
+  background-color:  #d6ad93;; /* Set the background color */
+  color: #fcfbfb; /* Set the text color */
+  padding: 20px; /* Add some padding for better spacing */
+  text-align: center; /* Center the text */
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.banner h5 {
+  margin: 0; /* Remove default margin */
+  font-size: 24px; /* Set the font size */
+  font-weight: bold;
+}

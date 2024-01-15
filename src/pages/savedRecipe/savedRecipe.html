@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../stylesheet/style.css">
 </head>
-<body>
+<body><div class="navbar fixed-top">
+    <div>
+      <img src="../../assets/logo-food-vault-vertical.png" alt="" />
+    </div>
+    <div>
+      <a href="./index.html"><button class="page">Home</button></a>
+      <a href="./pages/recipe/post.html"> <button class="page">+New Recipe</button></a>
+      <a href="./pages/savedRecipe/savedRecipe.html"> <button class="page">Saved Recipes</button></button></a>
+      <a href="./pages/MyRecipes/myrecipe.html"> <button class="page">My Recipes</button></button></a>
+    </div>
+    <div>
+      <a href="./pages/login/login.html"><button class="login">Login</button></a>
+    </div>
+    <div id="btn-div">
+      <!-- <button id="username"></button> -->
+    </div>
+      <button id="logout">logout</button>
+    
+  </div>
     <div id="savedRecipesContainer" class="recipe-container">
-       hi 
+  
     </div>
     <script type="module" src="savedRecipe.ts"></script>
 </body>

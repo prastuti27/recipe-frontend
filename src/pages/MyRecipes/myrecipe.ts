@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import { deleteRecipe } from './delete';
+import "../../stylesheet/style.css"
+import "../../stylesheet/home.css"
 
 
 interface CreateRecipePayloadInterface {
@@ -85,23 +87,38 @@ window.addEventListener('load', async function () {
           <i class="ph ph-heart"></i>
           <i class="ph ph-thumbs-up"></i>
           <i class="ph ph-chat-centered-dots"></i>
-         
+          <a href="../RecipeDetails/details.html?id=${recipe.id}" class="btn btn-primary">Details</a>
         </div>
       `;
       const deleteButton = document.createElement('button');
       deleteButton.type = 'button';
       deleteButton.classList.add('btn', 'btn-danger');
       deleteButton.textContent = 'Delete';
-      deleteButton.addEventListener('click', async() => {
-        await deleteRecipe(recipe.id)});
-      //   const editButton = document.createElement('button');
-      // editButton.type = 'button';
-      // editButton.classList.add('btn', 'btn-primary');
-      // editButton.textContent = 'Edit';
-      // editButton.addEventListener('click', () => edit(recipe));
+      deleteButton.addEventListener('click', async () => {
+        try {
+          // Call the deleteRecipe function
+          await deleteRecipe(recipe.id);
+      
+          // Remove the card from the UI immediately
+          card.remove();
+        } catch (error) {
+          console.error('Error deleting recipe:', error);
+        }
+      });
+        const editButton = document.createElement('button');
+        editButton.type = 'button';
+        editButton.classList.add('btn', 'btn-primary');
+        editButton.textContent = 'Edit';
+        
+        // Event listener for the Edit button
+        editButton.addEventListener('click', () => {
+          // Redirect to the edit page with the recipe ID in edit mode
+          window.location.href = `edit.html?id=${recipe.id}`;
+        });
+     
       const cardBody = card.querySelector('.card-body');
       if (cardBody) {
-        // cardBody.appendChild(editButton);
+        cardBody.appendChild(editButton);
         cardBody.appendChild(deleteButton);
        
       }

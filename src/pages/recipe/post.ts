@@ -141,45 +141,9 @@ addStepsBtn.addEventListener("click",(e:Event)=>{
  }
 })
 
-// async function getImage():string{
-//   let result = ""
-//   const file = photoInput.files && photoInput.files[0];
-//   if(file){
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => {result = reader.result as string};
-//   }
-//   return result
-// }
 
-// async function uploadPhotoToCloudinary(): Promise<string> {
-//   return new Promise<string>((resolve, reject) => {
-//     const file = photoInput.files && photoInput.files[0];
-//     console.log(file)
 
-//     if (file) {
-//       const formData = new FormData();
-//       formData.append('file', file);
 
-    
-//       axios.post(`https://api.cloudinary.com/v1_1/dvzvehmau/image/upload`, formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//           'Authorization': '581965853338769',
-//         },
-//       })
-//         .then((response) => {
-//           resolve(response.data.secure_url);
-//         })
-//         .catch((error) => {
-//           console.error("Cloudinary Upload Error:", error);
-//           reject(error);
-//         });
-//     } else {
-//       reject(new Error("No file selected"));
-//     }
-//   });
-// }
 
 
 

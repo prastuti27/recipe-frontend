@@ -1,4 +1,5 @@
 import axios from "axios";
+import  "./stylesheet/home.css"
 import { handleLikeButtonClick } from "./handleLike";
 import { handleSave } from "./handleSave";
 const user = document.createElement("button");
@@ -16,6 +17,20 @@ logout?.addEventListener("click", async (e) => {
 
   console.log(res);
 });
+const searchContainer = document.querySelector('.search');
+
+if (searchContainer) {
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.placeholder = 'Search for recipes...';
+
+  const searchButton = document.createElement('button');
+  searchButton.textContent = 'Search';
+
+  // Append the search input and button to the search container
+  searchContainer.appendChild(searchInput);
+  searchContainer.appendChild(searchButton);
+}
 
 const userData = JSON.parse(localStorage.getItem("user")!);
 const accessToken = localStorage.getItem("token");
@@ -94,6 +109,7 @@ axios.get("http://localhost:8000/api/recipe/recipes")
         </div>
       `;
       const likeButton = card.querySelector('.like-button') as HTMLElement;
+      console.log(response.data)
       const isLiked = response.data.isLiked; // Adjust based on your data structure
     
       const saveButton = card.querySelector('.save-button') as HTMLElement;
@@ -107,5 +123,5 @@ axios.get("http://localhost:8000/api/recipe/recipes")
     console.error('Error fetching recipe data:', error);
   });
 
-    })
+})
     

@@ -1,10 +1,56 @@
+// import axios from "axios";
 
+// export async function handleLikeButtonClick(likeButton: HTMLElement, recipeId: number, isLiked: boolean) {
+//   let response = null; 
 
+//   try {
+//     const token = localStorage.getItem('token');
+
+//     if (!token) {
+//       console.error('Token not available');
+//       return;
+//     }
+//     // isLiked = isLiked || false;
+//     const endpoint = isLiked ?  'unlike':'like';
+//     console.log(isLiked)
+//     console.log('Endpoint:', endpoint);
+//     console.log('Before Axios request');
+//     response = await axios.post(`http://localhost:8000/api/recipe/likes/${recipeId}/${endpoint}`, {
+//       recipeId
+      
+//     }, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     console.log('After Axios request');
+//     console.log('Server Response:', response);
+
+//     if (response.data.success) {
+//       isLiked = !isLiked; 
+//       likeButton.classList.toggle('liked', isLiked);
+//       likeButton.style.color = isLiked ? 'blue' : 'black';
+//     }
+
+//   } catch (error:any) {
+  
+//     if (error.response && error.response.status === 500 && error.response.data.message === 'User has already liked this recipe') {
+ 
+//       likeButton.classList.remove('liked');
+//       likeButton.style.color = 'black';
+//       isLiked = false;
+//     } else {
+      
+//       console.error('Error updating like status:', error);
+//       console.log('Server response:', response);
+//     }
+//   }
+// }
 
 import axios from "axios";
 
 export async function handleLikeButtonClick(likeButton: HTMLElement, recipeId: number, isLiked: boolean) {
-  let response; 
+  let response = null; 
 
   try {
     const token = localStorage.getItem('token');
@@ -14,30 +60,53 @@ export async function handleLikeButtonClick(likeButton: HTMLElement, recipeId: n
       return;
     }
 
-   
-    isLiked = !isLiked;
+    const endpoint = isLiked ? 'unlike' : 'like';
+    console.log(isLiked);
+    console.log('Endpoint:', endpoint);
+    console.log('Before Axios request');
 
-  
-    likeButton.style.color = isLiked ? 'blue' : 'black';
-
-    const endpoint = isLiked ? 'like' : 'unlike';
-         response = await axios.post(`http://localhost:8000/api/recipe/likes/${recipeId}/${endpoint}`, {
-      recipeId,
-      isLiked,
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
- 
-    if (response.data.success) {
-      likeButton.classList.toggle('liked', isLiked);
-     
+    // Modify the request for DELETE if "unlike"
+    if (isLiked) {
+      response = await axios.delete(`http://localhost:8000/api/recipe/likes/${recipeId}/${endpoint}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } else {
+      // Keep the POST request for "like"
+      response = await axios.post(`http://localhost:8000/api/recipe/likes/${recipeId}/${endpoint}`, {
+        recipeId
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
-  } catch (error) {
-    console.error('Error updating like status:', error);
-    console.log('Server response:', response); 
-    
+
+    console.log('After Axios request');
+    console.log('Server Response:', response);
+
+    if (response.data.success) {
+      isLiked = !isLiked; 
+      likeButton.classList.toggle('liked', isLiked);
+      likeButton.style.color = isLiked ? 'blue' : 'black';
+    }
+ 
+  } catch (error:any) {
+    if (error.response) {
+      const status = error.response.status;
+      const errorMessage = error.response.data.message;
+  
+      if (status === 500 && errorMessage.includes('User has already liked this recipe')) {
+        // Handle case where the user has already liked the recipe for "unlike" action
+        likeButton.classList.remove('liked');
+        likeButton.style.color = 'black';
+        isLiked = false;
+      } else {
+        // Handle other errors
+        console.error('Error updating like status:', error);
+        console.log('Server response:', response);
+      }
+    }
   }
 }
